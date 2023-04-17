@@ -5,9 +5,6 @@ export default {
     experiments: {
         outputModule: true,
     },
-    optimization: {
-        minimize: true,
-    },
     performance: {
         hints: false,
         maxEntrypointSize: 512000,
@@ -24,6 +21,10 @@ export default {
     },
     module: {
         rules: [
+            {
+                test: /\.html$/i,
+                loader: "html-loader",
+            },
             {
                 test: /\.(sass|scss|css)$/,
                 use: [
