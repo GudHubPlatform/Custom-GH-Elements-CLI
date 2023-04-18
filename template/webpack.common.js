@@ -1,5 +1,4 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import TerserPlugin from 'terser-webpack-plugin';
 
 export default {
     experiments: {
@@ -24,6 +23,9 @@ export default {
             {
                 test: /\.html$/i,
                 loader: "html-loader",
+                options: {
+                    minimize: false
+                }
             },
             {
                 test: /\.(sass|scss|css)$/,
@@ -46,10 +48,5 @@ export default {
         new MiniCssExtractPlugin({
             filename: 'style.css'
         })
-    ],
-    optimization: {
-        minimizer: [
-            new TerserPlugin()
-        ]
-    }
+    ]
 };
