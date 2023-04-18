@@ -1,6 +1,6 @@
 import './input.webcomponent.js';
 
-export default class CronPickerData {
+export default class GhInputData {
 
     /*------------------------------- FIELD TEMPLATE --------------------------------------*/
     
