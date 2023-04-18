@@ -43,7 +43,9 @@ class GhInput extends GhHtmlElement {
 
     async init() {
         const value = await gudhub.getFieldValue(this.appId, this.itemId, this.fieldId);
+        const model = await gudhub.getField(this.appId, this.fieldId);
 
+        this.color = model?.data_model?.color;
         this.value = value || '';
 
         super.render(html);

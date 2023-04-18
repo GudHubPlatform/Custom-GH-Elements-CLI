@@ -3,17 +3,17 @@ import './input.webcomponent.js';
 export default class GhInputData {
 
     /*------------------------------- FIELD TEMPLATE --------------------------------------*/
-    
+
     getTemplate() {
         return {
             constructor: 'field',
             name: 'Input',
             icon: 'text_icon',
             model: {
-                'field_id': 0,
-                'field_name': 'Input',
-                'field_value': '',
-                'data_type': 'input',
+                field_id: 0,
+                field_name: 'Input',
+                field_value: '',
+                data_type: 'input',
                 data_model: {
                     interpretation: [{
                         src: 'form',
@@ -47,13 +47,27 @@ export default class GhInputData {
     }
 
     /*--------------------------  SETTINGS --------------------------------*/
-    
+
     getSettings(scope) {
         return [{
             title: 'Options',
             type: 'general_setting',
             icon: 'menu',
-            columns_list: []
+            columns_list: [
+                [
+                    {
+                        type: 'ghElement',
+                        property: 'data_model.color',
+                        data_model: () => {
+                            return {
+                                data_type: 'color',
+                                field_name: 'Color',
+                                name_space: 'color'
+                            }
+                        }
+                    }
+                ]
+            ]
         }];
     }
 }
