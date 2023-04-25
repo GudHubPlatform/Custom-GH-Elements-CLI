@@ -8,53 +8,28 @@ class GhInput extends GhHtmlElement {
 
     constructor() {
         super();
-        this.appId;
-        this.itemId;
-        this.fieldId;
     }
 
-    // Add observer to app-id attribute to trigger attributeChangedCallback
+    // onInit() is called after parent gh-element scope is ready
 
-    static get observedAttributes() {
-        return ['app-id'];
-    }
-
-    // Triggere when attribute is changed
-    // We need to wait for app-id changed from {{appId}} to real value by angular, then wi initialize web component
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'app-id' && newValue.indexOf('{{') == -1) {
-            setTimeout(() => {
-                this.getAttributes();
-                this.init();
-            }, 0);
-        }
-    }
-
-    // Just helper method to get attributes from web component
-
-    getAttributes() {
-        this.appId = this.getAttribute('app-id');
-        this.itemId = this.getAttribute('item-id');
-        this.fieldId = this.getAttribute('field-id');
-    }
-
-    // Main method to render web component and add basic logic
-
-    async init() {
-        const value = await gudhub.getFieldValue(this.appId, this.itemId, this.fieldId);
-        const model = await gudhub.getField(this.appId, this.fieldId);
-
-        this.color = model?.data_model?.color;
-        this.value = value || '';
+    onInit() {
+        this.color = this.scope.field_model.data_model?.color;
 
         super.render(html);
+    }
 
+    // onUpdate() is called after value was updated
+
+    onUpdate() {
+        super.render(html);
+    }
+
+    // save() is called on input value change
+
+    save() {
         const input = this.querySelector('input');
 
-        input.addEventListener('change', async (e) => {
-            gudhub.setFieldValue(this.appId, this.itemId, this.fieldId, e.target.value);
-        });
+        this.value = input.value;
     }
 
 }
