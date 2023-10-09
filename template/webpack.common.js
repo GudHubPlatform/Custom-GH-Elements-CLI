@@ -10,7 +10,7 @@ export default {
         maxAssetSize: 512000
     },
     entry: {
-        main: './src/entry.js',
+        main: './src/data.js',
     },
     output: {
         filename: '[name].js',
